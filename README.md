@@ -20,7 +20,26 @@ Overview
 
 Usage
 -----
-### 使用方法(Protected関連)
+### 基本的な使い方
+クラスを定義する基本的な例。
+
+- ベースクラスの定義
+
+        PseudoClass.define("BaseClass", Object, function(value) {
+            // コンストラクタに相当。ここでメンバを定義する
+            var mValue = value;                             // プライベート変数を定義
+            var privateMethod = function(){...};            // プライベートメソッドを定義
+            this.getValue = function() { return value; }    // パブリックメソッドでプライベート変数にアクセス
+        });
+
+- 派生クラスの定義
+
+        PseudoClass.define("SubClass", BaseClass, function(value) {
+            initSuper(value);                               // ベースクラスを初期化
+            ...
+        });
+
+### Protected関連
 - 2011-10-13から導入されたProtected変数
 
     protected等をコールしたメソッドがオブジェクトのプロパティかどうかからチェックしているため、
