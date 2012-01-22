@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script type="text/javascript" src="../pseudoclass.js"></script>
+  <script type="text/javascript">
+	window.addEventListener("load", function(e) {
+		var out = document.getElementById("output");
+		PseudoClass.define("MyBaseClass", Object, function(value) {
+			var mValue = value;
+			this.value = "Super";
+			this.getValue = function() { return value; }
+			this.getPublicValue = function() { return this.value; }
+		});
+		PseudoClass.define("MySubClass", MyBaseClass, function(value) {
+			initSuper(this, "SUB");
+			var mValue = value;
+			this.value = "Sub";
+			this.getValue = function() { return this.getValue.callSuper(); }
+			this.getPublicValue = function() { return this.value; }
+		});
+		base = new MyBaseClass("Base");
+		obj = new MySubClass("Top");
+		out.innerHTML += "Object: " + base.constructor.name + "\n";
+		out.innerHTML += "Super : " + obj.getValue() + "\n";
+		out.innerHTML += "Public: " + obj.getPublicValue() + ", " + obj.getPublicValue.callSuper() + "\n";
+	}, false);
+  </script>
+</head>
+<body>
+  <h1>Test</h1>
+  <pre id="output"></pre>
+</body>
+</html>

@@ -7,9 +7,9 @@ Overview
 --------
 - 現時点ではObjectおよびError(SyntaxErrorなども含む)の継承を想定
 - 追加されるプロパティ
-    - \_\_pooBase          : 親オブジェクト(Class#\_\_pooBase)
-    - \_\_pooConstructor   : ユーザー定義コンストラクタ、というかイニシャライザ(Class.\_\_pooConstructor)
-    - callSuper            : object.getValue.callSuper()でスーパークラスのメソッド呼び出し
+    - \_\_pooBase        : 親オブジェクト(Class#\_\_pooBase)
+    - \_\_pooConstructor : ユーザー定義コンストラクタ、というかイニシャライザ(Class.\_\_pooConstructor)
+    - callSuper          : object.getValue.callSuper()でスーパークラスのメソッド呼び出し
     - initSuper          : 親オブジェクトの初期化。
                            親オブジェクトのイニシャライザが引数を取る場合は現在のイニシャライザからコールする。
     - protected          : Protected変数の宣言および初期化
@@ -21,9 +21,9 @@ Overview
 Usage
 -----
 ### 基本的な使い方
-クラスを定義する基本的な例。
+クラスを定義する*基本的*な例。
 
-- ベースクラスの定義
+- 基底クラスの定義
 
         PseudoClass.define("BaseClass", Object, function(value) {
             // コンストラクタに相当。ここでメンバを定義する
@@ -38,6 +38,11 @@ Usage
             initSuper(value);                               // ベースクラスを初期化
             ...
         });
+
+- スーパークラスのメソッドをコール
+
+        var sc = new SubClass("Test");
+        sc.getValue.callSuper();
 
 ### Protected関連
 - 2011-10-13から導入されたProtected変数
